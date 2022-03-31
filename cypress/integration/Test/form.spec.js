@@ -1,6 +1,6 @@
 /// <reference types="Cypress" />
-import HomePage from '../PageObject/HomePage';
-import ProductPage from '../PageObject/ProductPage';
+import HomePage from '../../support/PageObject/HomePage';
+import ProductPage from '../../support/PageObject/ProductPage';
 
 describe("Basic of cypress", () => {
     let data = {}
@@ -13,7 +13,7 @@ describe("Basic of cypress", () => {
     it("Table cypress test", () => {
         const homePage = new HomePage();
         const productPage = new ProductPage();
-        cy.visit('https://rahulshettyacademy.com/angularpractice/');
+        cy.visit(Cypress.env('url'));
         // cy.get("form input[name='name']").type(data.name);
         // cy.get('select').select(data.gender);
         // cy.get("h4 input[name='name']").should('have.value', data.name);
