@@ -40,6 +40,30 @@ describe("Basic of cypress", () => {
             cy.selectProduct(product);
         });
 
-        productPage.getCheckOutPrimaryLink().click()
+        productPage.getCheckOutPrimaryLink().click();
+        let amount = 0;
+        cy.get('tr td:nth-child(4) strong').each(($el, index, $list) => {
+            cy.log($el.text())
+            amount += +$el.text().match(/\d+/)[0]
+        });
+
+        cy.get('.text-right strong').then(response => {
+            const totalAmount = +response.text().match(/\d+/)[0];
+            expect(totalAmount).to.equal(amount);
+        })
+
+        cy.contains('Checkout').click();
+        cy.get('#country').type('india');
+        // Cypress.config('defaultCommandTimeout', 8000);
+        cy.get('.suggestions > ul > li > a').click();
+        cy.get('#checkbox2').click({ force: true });
+        cy.get('input[type="submit"]').click();
+        // cy.get('.alert').should('have.text', 'Success! Thank you! Your order will be delivered in next few weeks :-).')
+        cy.get('.alert').then(function (element) {
+            const actualText = element.text();
+            expect(actualText.includes('Success')).to.be.true;
+            // if(actualText.includes('Success')) {
+            // }
+        })
     });
 });
