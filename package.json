@@ -6,13 +6,18 @@
   "scripts": {
     "test": "npx cypress run",
     "test-browser": "npx cypress run --headed",
-    "test-chrome": "npx cypress run --browser chrome"
+    "test-chrome": "npx cypress run --browser chrome",
+    "test-cucumber": "npx cypress run --spec cypress\\integration\\Test\\BDD\\ecommerce.feature --headed --browser chrome"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "cypress": "^9.5.2",
+    "cypress-cucumber-preprocessor": "^4.3.1",
     "cypress-iframe": "^1.0.1"
+  },
+  "cypress-cucumber-preprocessor": {
+    "nonGlobalStepDefinitions": true
   }
 }
